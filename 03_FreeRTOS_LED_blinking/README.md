@@ -1,5 +1,5 @@
-## FreeRTOS setup for STM32F429VG board
-Template project for STM32F429VG board with FreeRTOS LED blinking.
+## FreeRTOS setup for STM32F429VG
+Template project for STM32F429VG with FreeRTOS LED blinking.
 
 
 Using CMSIS only.
