@@ -266,7 +266,7 @@
         </option>
         <option>
           <name>CCLangConformance</name>
-          <state>2</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCSignedPlainChar</name>
