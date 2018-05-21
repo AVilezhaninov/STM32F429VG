@@ -7,6 +7,7 @@ Templates, examples and projects for STM32F429VG.
   and TIM6 interrupt LED blinking;
   - **03_FreeRTOS_LED_blinking**: FreeRTOS project setup and LED blinking from task;
   - **04_USART_echo**: simple USART echo project;
+  - **05_IWDG**: independent watchdog timer example;
 
 ## Versions
   - IAR EWARM v7.50;
