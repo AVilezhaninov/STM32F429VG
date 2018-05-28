@@ -9,10 +9,12 @@ Templates, examples and projects for STM32F429VG.
   - **04_USART_echo**: simple USART echo project;
   - **05_IWDG**: independent watchdog timer example;
   - **06_DAC**: internal DAC example;
+  - **07_Unique_ID**: reading STM32 unique ID;
 
 ## Versions
   - IAR EWARM v7.50;
   - CMSIS 4.5.0;
+  - FreeRTOS v10.0.0;
 
 ## Licence
 MIT Licence
