@@ -11,6 +11,7 @@ Templates, examples and projects for STM32F429VG.
   - **06_DAC**: internal DAC example;
   - **07_Unique_ID**: reading STM32 unique ID;
   - **08_SPI_polling_loopback**: SPI polling loopback;
+  - **09_FreeRTOS_CAN_loopback**: CAN loopback with FreeRTOS tasks;
 
 ## Versions
   - IAR EWARM v8.20;
