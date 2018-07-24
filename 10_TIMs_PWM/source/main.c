@@ -8,6 +8,9 @@
 /******************************************************************************/
 /* Definitions ****************************************************************/
 /******************************************************************************/
+#define TIM1_PSC    (180u - 1u)
+#define TIM1_ARR    (1000u - 1u)
+
 #define TIM2_PSC    (90u - 1u)
 #define TIM2_ARR    (1000u - 1u)
 
@@ -21,6 +24,7 @@
 /******************************************************************************/
 /* Private function prototypes ************************************************/
 /******************************************************************************/
+void TIM1_Init(void);
 void TIM2_Init(void);
 void TIM3_Init(void);
 void TIM4_Init(void);
@@ -33,6 +37,7 @@ int main(void) {
     /* Init system clock */
     SystemClock_Init();
 
+    TIM1_Init();
     TIM2_Init();
     TIM3_Init();
     TIM4_Init();
@@ -45,6 +50,37 @@ int main(void) {
 /******************************************************************************/
 /* Private functions **********************************************************/
 /******************************************************************************/
+void TIM1_Init(void) {
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;    /* Enable GPIOA clock */
+    GPIOA->MODER |= GPIO_MODER_MODER8_1;    /* GPIOA pin 8 in alternate mode */
+    GPIOA->MODER |= GPIO_MODER_MODER9_1;    /* GPIOA pin 9 in alternate mode */
+    GPIOA->MODER |= GPIO_MODER_MODER10_1;   /* GPIOA pin 10 in alternate mode */
+    GPIOA->MODER |= GPIO_MODER_MODER11_1;   /* GPIOA pin 11 in alternate mode */
+    GPIOA->AFR[1u] |= (1u << 0u);           /* PA8 in TIM1_CH1 AF2 */
+    GPIOA->AFR[1u] |= (1u << 4u);           /* PA9 in TIM1_CH2 AF2 */
+    GPIOA->AFR[1u] |= (1u << 8u);           /* PA10 in TIM1_CH3 AF2 */
+    GPIOA->AFR[1u] |= (1u << 12u);          /* PA11 in TIM1_CH4 AF2 */
+
+    RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;     /* Enable TIM1 clock */
+    TIM1->PSC = TIM1_PSC;                   /* Set TIM1 prescaler */
+    TIM1->ARR = TIM1_ARR;                   /* Set TIM1 auto reload value */
+    TIM1->CCR1 = TIM1->ARR / 2u;            /* Set TIM1 CH1 compare value */
+    TIM1->CCR2 = TIM1->ARR / 2u;            /* Set TIM1 CH2 compare value */
+    TIM1->CCR3 = TIM1->ARR / 2u;            /* Set TIM1 CH3 compare value */
+    TIM1->CCR4 = TIM1->ARR / 2u;            /* Set TIM1 CH4 compare value */
+    TIM1->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2; /* Set CH1 PMW mode 1 */
+    TIM1->CCMR1 |= TIM_CCMR1_OC2M_1 | TIM_CCMR1_OC2M_2; /* Set CH2 PMW mode 1 */
+    TIM1->CCMR2 |= TIM_CCMR2_OC3M_1 | TIM_CCMR2_OC3M_2; /* Set CH3 PMW mode 1 */
+    TIM1->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2; /* Set CH4 PMW mode 1 */
+    TIM1->CCER |= TIM_CCER_CC1E;            /* Enable CH1 compare output */
+    TIM1->CCER |= TIM_CCER_CC2E;            /* Enable CH2 compare output */
+    TIM1->CCER |= TIM_CCER_CC3E;            /* Enable CH3 compare output */
+    TIM1->CCER |= TIM_CCER_CC4E;            /* Enable CH4 compare output */
+    TIM1->BDTR |= TIM_BDTR_MOE;             /* Main output enable */
+    TIM1->CR1 |= TIM_CR1_CEN;               /* Enable TIM1 */
+}
+
+
 void TIM2_Init(void) {
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;    /* Enable GPIOA clock */
     GPIOA->MODER |= GPIO_MODER_MODER0_1;    /* GPIOA pin 0 in alternate mode */
