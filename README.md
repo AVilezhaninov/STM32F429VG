@@ -13,6 +13,7 @@ Templates, examples and projects for STM32F429VG.
   - **08_SPI_polling_loopback**: SPI polling loopback;
   - **09_FreeRTOS_CAN_loopback**: CAN loopback with FreeRTOS tasks;
   - **10_TIMs_PWM**: TIMs PWM;
+  - **11_ADC_to_DAC**: Transfer data from ADC input to DAC output;
 
 ## Versions
   - IAR EWARM v8.20;
