@@ -4,8 +4,7 @@ Templates and examples for STM32F429VG on STM32F4DISCOVERY board.
 
 ## List
   - **01_LED_blinking**: the simplest LED blinking
-  - **02_RCC_TIM6_LED_blinking**: RCC config with HSE and PLL for 180MHz frequency,
-  and TIM6 interrupt LED blinking;
+  - **02_HSE_PLL**: config SYSCLK for 180 MHz with HSE and PLL
   - **03_FreeRTOS_LED_blinking**: FreeRTOS project setup and LED blinking from task;
   - **04_USART_echo**: simple USART echo project;
   - **05_IWDG**: independent watchdog timer example;
