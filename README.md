@@ -6,7 +6,7 @@ Templates and examples for STM32F429VG on STM32F4DISCOVERY board.
   - **01_LED_blinking**: the simplest LED blinking
   - **02_HSE_PLL**: config SYSCLK for 180 MHz with HSE and PLL
   - **03_FreeRTOS**: the simplest FreeRTOS project with LED blinking
-  - **04_USART_echo**: simple USART echo project;
+  - **04_USART_echo**: all USARTs echo from ISR
   - **05_IWDG**: independent watchdog timer example;
   - **06_DAC**: internal DAC example;
   - **07_Unique_ID**: reading STM32 unique ID;

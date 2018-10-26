@@ -1,8 +1,13 @@
-## USART1 echo
-Template project for STM32F429VG, with USART1 echo.
+## USART echo
 
+All USARTs echo from corresponding IRQ.
 
-Using CMSIS only.
+## Features
+ - Clock source: HSE
+ - SYSCLK: 180 MHz
+ - APB1: 45 MHz
+ - APB2: 90 MHz
+ - CMSIS only
 
 ## Licence
 MIT Licence
