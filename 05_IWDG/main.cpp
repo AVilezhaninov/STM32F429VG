@@ -80,15 +80,15 @@ static void InitRTOSObjects() {
 }
 
 static void InitIwdg(const uint16_t iwdg_period) {
-  ResetIwdgt();            /* reset independent watch dog */
-  IWDG->KR = 0x5555u;      /* enable access */
-  IWDG->PR = IWDG_PR_PR_0; /* divider 8 */
+  ResetIwdgt();            /* Reset independent watch dog */
+  IWDG->KR = 0x5555u;      /* Enable access */
+  IWDG->PR = IWDG_PR_PR_0; /* Divider 8 */
   if (iwdg_period <= 1000u) {
     IWDG->RLR = (uint16_t)(iwdg_period * 4u);
   } else {
     IWDG->RLR = 4000u;
   }
-  IWDG->KR = 0xCCCCu;     /* start */
+  IWDG->KR = 0xCCCCu;     /* Start IWDG */
   ResetIwdgt();
 }
 

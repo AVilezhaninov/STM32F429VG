@@ -1,42 +1,37 @@
 /* CMSIS */
-#include "stm32f4xx.h"
-
+#include "CMSIS\Device\stm32f4xx.h"
 
 /******************************************************************************/
-/* Definitions ****************************************************************/
+/* Private definitions ********************************************************/
 /******************************************************************************/
-#define DAC_MAX     4096u
-
+#define DAC_MAX_VALUE   4095u
 
 /******************************************************************************/
 /* Private function prototypes ************************************************/
 /******************************************************************************/
-static void DAC_Init(void);
-
+static void InitDac();
 
 /******************************************************************************/
 /* Main ***********************************************************************/
 /******************************************************************************/
-int main(void) {
-    /* Init DAC */
-    DAC_Init();
+int main() {
+  InitDac();
 
-    while (1u) {
-        /* Generate triangle signal for both DAC channels */
-        for (uint32_t i = 0, j = DAC_MAX; i < DAC_MAX; ++i, --j) {
-            DAC->DHR12R1 = i;   /* Set DAC channel 1 value */
-            DAC->DHR12R2 = j;   /* Set DAC channel 2 value */
-        }
+  while (1) {
+    /* Generate triangle signal for both DAC channels */
+    for (uint32_t i = 0, j = DAC_MAX_VALUE; i <= DAC_MAX_VALUE; ++i, --j) {
+      DAC->DHR12R1 = i; /* Set DAC channel 1 value */
+      DAC->DHR12R2 = j; /* Set DAC channel 2 value */
     }
+  }
 }
-
 
 /******************************************************************************/
 /* Private functions **********************************************************/
 /******************************************************************************/
-static void DAC_Init(void) {
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;    /* enable PORTA clock */
-    RCC->APB1ENR |= RCC_APB1ENR_DACEN;      /* enable DAC clock */
-    DAC->CR |= DAC_CR_EN1;                  /* enable DAC channel 1 */
-    DAC->CR |= DAC_CR_EN2;                  /* enable DAC channel 2 */
+static void InitDac() {
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; /* Enable PORT clock */
+  RCC->APB1ENR |= RCC_APB1ENR_DACEN;   /* Enable DAC clock */
+  DAC->CR |= DAC_CR_EN1;               /* Enable DAC channel 1, PA4 */
+  DAC->CR |= DAC_CR_EN2;               /* Enable DAC channel 2, PA5 */
 }
