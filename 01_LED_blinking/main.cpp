@@ -4,13 +4,13 @@
 /******************************************************************************/
 /* Private definitions ********************************************************/
 /******************************************************************************/
-#define LED_TOGGLE_DELAY  1000000u
+#define LED_TOGGLE_DELAY  500000u
 
 /******************************************************************************/
 /* Private function prototypes ************************************************/
 /******************************************************************************/
-static void InitGpio(void);
-static void ToggleLed(void);
+static void InitGpio();
+static void ToggleLed();
 static void DummyDelay(const int delay);
 
 /******************************************************************************/
@@ -28,12 +28,12 @@ int main() {
 /******************************************************************************/
 /* Private functions **********************************************************/
 /******************************************************************************/
-static void InitGpio(void) {
+static void InitGpio() {
   RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;  /* Enable GPIO clock */
   GPIOD->MODER |= GPIO_MODER_MODER14_0; /* GPIOD pin 14 in push-pull mode */
 }
 
-static void ToggleLed(void) {
+static void ToggleLed() {
   GPIOD->ODR ^= GPIO_ODR_ODR_14;        /* Toggle GPIOD pin 14 */
 }
 

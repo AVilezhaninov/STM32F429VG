@@ -12,26 +12,37 @@
 /******************************************************************************/
 /* Private definitions ********************************************************/
 /******************************************************************************/
-#define LED_TOGGLE_DELAY    500u
+#define START_TASK_DELAY_MS   500u
+#define LED_TOGGLE_DELAY_MS   200u
+#define IWDG_TEST_DELAY_MS    2000u
 
 /******************************************************************************/
 /* Private function prototypes ************************************************/
 /******************************************************************************/
 static void InitAll();
 static void InitHardware();
-static void InitGpio();
 static void InitRTOSObjects();
+static void InitIwdg(const uint16_t iwdg_period);
+static void ResetIwdgt();
 static void ToggleLed();
 
 /******************************************************************************/
 /* Tasks **********************************************************************/
 /******************************************************************************/
-void LedTask(void *pvParameters) {
+void LEDBlinkTask(void *pvParameters) {
   (void)pvParameters;
+  uint8_t task_cnt = 0u;
+
+  vTaskDelay(START_TASK_DELAY_MS);
 
   while (1) {
+    if (task_cnt < (IWDG_TEST_DELAY_MS / LED_TOGGLE_DELAY_MS)) {
+      ++task_cnt;
+      ResetIwdgt();
+    }
+
     ToggleLed();
-    vTaskDelay(LED_TOGGLE_DELAY);
+    vTaskDelay(LED_TOGGLE_DELAY_MS);
   }
 }
 
@@ -57,19 +68,34 @@ static void InitAll() {
 
 static void InitHardware() {
   InitSystemClock();
-  InitGpio();
-}
+  InitIwdg(1000u);  /* Init IWDG timer for 1 second period */
 
-static void InitGpio() {
   RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;  /* Enable GPIO clock */
-  GPIOD->MODER |= GPIO_MODER_MODER14_0; /* PD14 in push-pull mode */
+  GPIOD->MODER |= GPIO_MODER_MODER14_0; /* GPIOD pin 14 in push-pull mode */
 }
 
 static void InitRTOSObjects() {
   /* Create tasks */
-  xTaskCreate(LedTask, "", configMINIMAL_STACK_SIZE, NULL, 1u, NULL);
+  xTaskCreate(LEDBlinkTask, "", configMINIMAL_STACK_SIZE, NULL, 1u, NULL);
+}
+
+static void InitIwdg(const uint16_t iwdg_period) {
+  ResetIwdgt();            /* reset independent watch dog */
+  IWDG->KR = 0x5555u;      /* enable access */
+  IWDG->PR = IWDG_PR_PR_0; /* divider 8 */
+  if (iwdg_period <= 1000u) {
+    IWDG->RLR = (uint16_t)(iwdg_period * 4u);
+  } else {
+    IWDG->RLR = 4000u;
+  }
+  IWDG->KR = 0xCCCCu;     /* start */
+  ResetIwdgt();
+}
+
+static void ResetIwdgt() {
+  IWDG->KR = 0xAAAAu;
 }
 
 static void ToggleLed() {
-  GPIOD->ODR ^= GPIO_ODR_ODR_14; /* Toggle PD14 */
+  GPIOD->ODR ^= GPIO_ODR_ODR_14;  /* Toggle GPIOD pin 14 */
 }
