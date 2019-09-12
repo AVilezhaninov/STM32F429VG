@@ -1,17 +1,16 @@
 /* CMSIS */
-#include "stm32f4xx.h"
+#include "CMSIS\Device\stm32f4xx.h"
 
 /* User */
-#include "RCC.h"
-
+#include "user\RCC.h"
 
 /******************************************************************************/
 /* Main ***********************************************************************/
 /******************************************************************************/
-int main(void) {
-    SystemClock_Init();     /* Config SYSCLK for 180 MHz with HSE and PLL */
+int main() {
+  InitSystemClock(); /* Config SYSCLK for 180 MHz with HSE and PLL */
 
-    while (1u) {
-
-    }
+  while (1) {
+    ;
+  }
 }

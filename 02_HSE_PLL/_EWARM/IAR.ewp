@@ -1095,6 +1095,12 @@
             </file>
         </group>
     </group>
+    <group>
+        <name>user</name>
+        <file>
+            <name>$PROJ_DIR$\..\user\RCC.cpp</name>
+        </file>
+    </group>
     <file>
         <name>$PROJ_DIR$\..\main.cpp</name>
     </file>
