@@ -15,6 +15,12 @@ Templates and examples for STM32F429VG on STM32F4DISCOVERY board.
   - **10_TIMs_PWM**: TIMs PWM;
   - **11_ADC_to_DAC**: Transfer data from ADC input to DAC output;
   - **12_TIM1_PWM_input**: TIM1 PWM input capture;
+  - **13_Injected_ADC_started_from_TIM**: 4 injected channels ADC sampling
+  started from TIM with internal reference source;
+  - **14_Regular_ADC_single_channel_started_from_TIM**: single regular channel
+  ADC conversion;
+  - **15_Regular_ADC_started_from_TIM_with_DMA**: 4 regular channels ADC
+  sampling with DMA;
 
 
 ## Versions
