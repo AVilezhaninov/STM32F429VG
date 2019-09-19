@@ -21,6 +21,7 @@ Templates and examples for STM32F429VG on STM32F4DISCOVERY board.
   ADC conversion;
   - **15_Regular_ADC_started_from_TIM_with_DMA**: 4 regular channels ADC
   sampling with DMA;
+  - **16_USART_DMA_sender**: Send data through USART with DMA;
 
 
 ## Versions

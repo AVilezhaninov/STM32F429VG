@@ -1,6 +1,6 @@
 ## Internal DAC example
-Template project for STM32F429VG, with DAC example.
 
+Internal DAC example.
 
 Using CMSIS only.
 

@@ -1,6 +1,6 @@
 ## TIM PWM
-Template project for STM32F429VG, with TIMs PWM.
 
+All TIMs PWM.
 
 Using CMSIS only.
 

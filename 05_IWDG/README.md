@@ -1,5 +1,6 @@
 ## Independent watchdog timer example
-Template project for STM32F429VG, with IWDG example.
+
+Independent watch dog example.
 
 
 Using CMSIS only.
